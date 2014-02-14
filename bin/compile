@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-echo "-----> Nothing to do."
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+VENDOR_DIR="vendor"
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "-----> Adding Item-Optim binaries"
+
+cp -vr ${BUILD_DIR}/${VENDOR_DIR}/image-optim ${HOME}/${VENDOR_DIR} | indent
+export PATH="$PATH:$HOME/vendor/image-optim"

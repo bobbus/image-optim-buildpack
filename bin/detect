@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # bin/detect <build-dir>
 
-echo "Null"
+echo "Image-Optim Buildback"
 exit 0
