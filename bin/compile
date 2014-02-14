@@ -22,6 +22,12 @@ mkdir -p ${BUILD_DIR}/${VENDOR_DIR}
 cp -vr ./image-optim ${BUILD_DIR}/${VENDOR_DIR} | indent
 export PATH="$PATH:$HOME/vendor/image-optim"
 
+echo "-----> Image-Optim binaries versions"
+
+./image-optim/advpng -V | indent
+
+./image-optim/jpegoptim -V | indent
+
 cd $WORKING_DIR
 
 echo "-----> Adding image-optim binaries to PATH"
