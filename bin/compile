@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-
 BUILD_DIR=$1
 CACHE_DIR=$2
 BIN_DIR=$(cd $(dirname $0); pwd)
@@ -22,23 +21,28 @@ mkdir -p ${BUILD_DIR}/${VENDOR_DIR}
 cp -vr ./image-optim ${BUILD_DIR}/${VENDOR_DIR} | indent
 export PATH="$PATH:$HOME/vendor/image-optim"
 
-echo "-----> Image-Optim binaries versions"
+echo "-----> Adding image-optim binaries symlink to properly use them in other buildpack and display versions"
 
-cd ${BUILD_DIR}/${VENDOR_DIR}/image-optim
+cd /tmp/codon/vendor/bin
 
-./advpng -V | head -1 | indent
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/advpng advpng
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/gifsicle gifsicle
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/jpegoptim jpegoptim
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/jpegtran jpegtran
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/optipng optipng
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/pngcrush pngcrush
 
-./gifsicle --version | head -1 | indent 
+advpng -V | head -1 | indent
 
-./jpegoptim -V | head -1 | indent
+gifsicle --version | head -1 | indent 
 
-./jpegtran -V /dev/null 2>&1 | head -1 | indent
+jpegoptim -V | head -1 | indent
 
-./optipng -V | head -1 | indent
+jpegtran -V /dev/null 2>&1 | head -1 | indent
 
-./pngcrush -V | sed -n 2p | indent
+optipng -V | head -1 | indent
 
-
+pngcrush -V | sed -n 2p | indent
 
 cd $WORKING_DIR
 
