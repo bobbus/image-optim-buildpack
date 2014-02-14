@@ -28,6 +28,10 @@ cd ${BUILD_DIR}/${VENDOR_DIR}/image-optim
 
 ./advpng -V | head -1 | indent
 
+./gifsicle --version | head -1 | indent 
+
+./jhead -V | head -1 | indent
+
 ./jpegoptim -V | head -1 | indent
 
 ./jpegtran -V /dev/null 2>&1 | head -1 | indent
@@ -35,6 +39,8 @@ cd ${BUILD_DIR}/${VENDOR_DIR}/image-optim
 ./optipng -V | head -1 | indent
 
 ./pngcrush -V | sed -n 2p | indent
+
+
 
 cd $WORKING_DIR
 
