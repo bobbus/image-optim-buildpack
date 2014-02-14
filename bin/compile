@@ -30,11 +30,11 @@ cd ${BUILD_DIR}/${VENDOR_DIR}/image-optim
 
 ./jpegoptim -V | head -1 | indent
 
-./jpegtran -V /dev/null 2>&1 | head -1
+./jpegtran -V /dev/null 2>&1 | head -1 | indent
 
-./optipng -V | head -1
+./optipng -V | head -1 | indent
 
-./pngcrush -V | head -2
+./pngcrush -V | sed -n 2p | indent
 
 cd $WORKING_DIR
 
