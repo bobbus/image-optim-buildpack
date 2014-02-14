@@ -4,7 +4,6 @@ Add binaries for image-optim on Herokug
 
 - advpng
 - gifsicle
-- jhead
 - jpegoptim
 - jpegtran
 - optipng
