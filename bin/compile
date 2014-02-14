@@ -24,9 +24,17 @@ export PATH="$PATH:$HOME/vendor/image-optim"
 
 echo "-----> Image-Optim binaries versions"
 
-./image-optim/advpng -V | indent
+cd ${BUILD_DIR}/${VENDOR_DIR}/image-optim
 
-./image-optim/jpegoptim -V | indent
+./advpng -V | head -1 | indent
+
+./jpegoptim -V | head -1 | indent
+
+./jpegtran -V /dev/null 2>&1 | head -1
+
+./optipng -V | head -1
+
+./pngcrush -V | head -2
 
 cd $WORKING_DIR
 
