@@ -4,6 +4,9 @@
 
 BUILD_DIR=$1
 CACHE_DIR=$2
+BIN_DIR=$(cd $(dirname $0); pwd)
+ROOT_DIR=$(dirname $BIN_DIR)
+WORKING_DIR=$(pwd)
 VENDOR_DIR="vendor"
 
 indent() {
@@ -12,5 +15,19 @@ indent() {
 
 echo "-----> Adding Item-Optim binaries"
 
-cp -vr ${BUILD_DIR}/${VENDOR_DIR}/image-optim ${HOME}/${VENDOR_DIR} | indent
+cd $ROOT_DIR/${VENDOR_DIR}
+
+mkdir -p ${BUILD_DIR}/${VENDOR_DIR}
+
+cp -vr ./image-optim ${BUILD_DIR}/${VENDOR_DIR} | indent
 export PATH="$PATH:$HOME/vendor/image-optim"
+
+cd $WORKING_DIR
+
+echo "-----> Adding image-optim binaries to PATH"
+
+cd $ROOT_DIR/profile.d
+
+mkdir -p ${BUILD_DIR}/.profile.d
+
+cp -v * ${BUILD_DIR}/.profile.d/ | indent
