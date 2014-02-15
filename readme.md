@@ -16,3 +16,4 @@ On compilation :
 - Binaries are copied into vendor/image-optim
 - version of each binaries is displayed
 - vendor/image-optim is added to path through a .profile.d script
+- Symlink to binaries is added to ensure next buildpacks will have binaries available
