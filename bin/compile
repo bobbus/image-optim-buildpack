@@ -21,7 +21,9 @@ mkdir -p ${BUILD_DIR}/${VENDOR_DIR}
 cp -vr ./image-optim ${BUILD_DIR}/${VENDOR_DIR} | indent
 export PATH="$PATH:$HOME/vendor/image-optim"
 
-echo "-----> Adding image-optim binaries symlink to properly use them in other buildpack and display versions"
+cd $WORKING_DIR
+
+echo "-----> Adding image-optim binaries symlink to make them available in next buildpacks"
 
 cd /tmp/codon/vendor/bin
 
@@ -31,20 +33,6 @@ ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/jpegoptim jpegoptim
 ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/jpegtran jpegtran
 ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/optipng optipng
 ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/pngcrush pngcrush
-
-advpng -V | head -1 | indent
-
-gifsicle --version | head -1 | indent 
-
-jpegoptim -V | head -1 | indent
-
-jpegtran -V /dev/null 2>&1 | head -1 | indent
-
-optipng -V | head -1 | indent
-
-pngcrush -V | sed -n 2p | indent
-
-cd $WORKING_DIR
 
 echo "-----> Adding image-optim binaries to PATH"
 
@@ -61,3 +49,22 @@ if [ -f ${BUILD_DIR}/Gemfile ]; then
 
     cp -v image_optim.yml ${BUILD_DIR}/.image_optim.yml
 fi
+
+cd $WORKING_DIR
+
+echo "-----> Image-Optim binaries version"
+
+advpng -V | head -1 | indent
+
+gifsicle --version | head -1 | indent 
+
+jpegoptim -V | head -1 | indent
+
+jpegtran -V /dev/null 2>&1 | head -1 | indent
+
+optipng -V | head -1 | indent
+
+pngcrush -V | sed -n 2p | indent
+
+cd $WORKING_DIR
+
