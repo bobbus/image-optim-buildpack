@@ -53,3 +53,11 @@ cd $ROOT_DIR/profile.d
 mkdir -p ${BUILD_DIR}/.profile.d
 
 cp -v * ${BUILD_DIR}/.profile.d/ | indent
+
+if [ -f ${BUILD_DIR}/Gemfile ]; then
+    echo "-----> Gemfile detected, adding image-optim config file"
+
+    cd ${ROOT_DIR}/config
+
+    cp -v image_optim.yml ${BUILD_DIR}/.image_optim.yml
+fi
