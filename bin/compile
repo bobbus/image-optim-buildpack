@@ -6,7 +6,7 @@ CACHE_DIR=$2
 BIN_DIR=$(cd $(dirname $0); pwd)
 ROOT_DIR=$(dirname $BIN_DIR)
 WORKING_DIR=$(pwd)
-VENDOR_DIR="vendor"
+VENDOR_DIR="vendor/image-optim"
 
 indent() {
   sed -u 's/^/       /'
@@ -18,7 +18,17 @@ cd $ROOT_DIR/${VENDOR_DIR}
 
 mkdir -p ${BUILD_DIR}/${VENDOR_DIR}
 
-cp -vr ./image-optim ${BUILD_DIR}/${VENDOR_DIR} | indent
+cp -v * ${BUILD_DIR}/${VENDOR_DIR} | indent
+
+dpkg -l |grep libjpeg62 > /dev/null
+if [ $? -eq 0 ]
+then
+  cp -v jpegoptim/jpegoptim-cedar ${BUILD_DIR}/${VENDOR_DIR}/jpegoptim | indent
+else
+  cp -v jpegoptim/jpegoptim-cedar14 ${BUILD_DIR}/${VENDOR_DIR}/jpegoptim | indent
+fi
+
+
 export PATH="$PATH:$HOME/vendor/image-optim"
 
 cd $WORKING_DIR
@@ -27,12 +37,12 @@ echo "-----> Adding image-optim binaries symlink to make them available in next 
 
 cd /tmp/codon/vendor/bin
 
-ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/advpng advpng
-ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/gifsicle gifsicle
-ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/jpegoptim jpegoptim
-ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/jpegtran jpegtran
-ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/optipng optipng
-ln -s ${BUILD_DIR}/${VENDOR_DIR}/image-optim/pngcrush pngcrush
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/advpng advpng
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/gifsicle gifsicle
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/jpegoptim jpegoptim
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/jpegtran jpegtran
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/optipng optipng
+ln -s ${BUILD_DIR}/${VENDOR_DIR}/pngcrush pngcrush
 
 echo "-----> Adding image-optim binaries to PATH"
 
