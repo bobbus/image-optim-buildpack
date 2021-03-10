@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This buildpack was made years ago and is not maintained anymore, it includes binaries which are most probably not on the last version available. Instead of using it directly, I would suggest you to fork it and update the binaries to the last version.
+
 # Heroku Image-Optim Buildpack
 
 Add binaries for image-optim on Heroku, can be used with heroku-buildpack-multi.
